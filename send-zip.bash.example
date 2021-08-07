@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+username="pi"
+password="N00BRCRC"
+dir_origin="/home/aidan/code/go/tests/cliff/bin/cli-build.zip"
+dir_destination="/home/pi"
+Ip="192.168.15.100"
+Port="22"
+
+echo $username@$Ip
+sshpass -p "$password" scp -P $Port -rC $dir_origin $username@$Ip:$dir_destination
+sshpass -p "$password"   ssh $username@$Ip -p $Port unzip /home/pi/cli-build.zip && ls -l
+echo "File upload to remote server completed! ;)"

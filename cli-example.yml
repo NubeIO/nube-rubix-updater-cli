@@ -1,0 +1,77 @@
+definitions:
+  user: &user
+    long: user
+    short: u
+    type: string
+name: download-bios
+short: Update bios
+flags:
+  - long: app
+    short: a
+    type: bool
+    description: download rubix bios
+    default: false
+  - long: owner
+    short: g
+    type: string
+    description: repo owner
+    default: "NubeIO"
+  - long: repo
+    short: r
+    type: string
+    description: repo name
+    default: "rubix-bios"
+  - long: dir
+    short: d
+    type: string
+    description: build dir location
+    default: "/data/rubix-bios"
+  - long: token
+    short: t
+    type: string
+    description: github token
+    default: ""
+commands:
+  - name: mk-build-dir
+    args: 0
+    flags:
+      - <<: *user
+        description: user
+        default: pi
+    run: |
+          echo /home/flags["user"]/builds
+          mkdir /home/flags["user"]/builds
+          ls -l /home/flags["user"]/builds
+  - name: mk-data-dir
+    args: 0
+    run: |
+      ls -l /data
+      sudo mkdir /data
+      ls -l /data
+  - name: del-data-dir
+    args: 0
+    run: |
+      ls -l /data
+      sudo rm -r /data
+      ls -l /data
+  - name: install-bios
+    short: install the bios bitch
+    flags:
+      - long: token
+        short: t
+        type: string
+        description: download rubix bios
+        default: ""
+      - long: dir
+        short: d
+        type: string
+        description: dir for the rubix build
+        default: ""
+    run:  |
+          cd flags["dir"]
+          pwd
+          sudo ./rubix-bios -p 1615 -g /data/rubix-bios -d data -c config -a apps --prod --install --auth --device-type armv7 --token flags["token"]
+
+
+# sudo ./rubix-bios -p 1615 -g /data/rubix-bios -d data -c config -a apps --prod --install --auth --device-type armv7 --token ghp_j9mu1111
+# sudo ./rubix-bios -p 1615 -g /data/rubix-bios -d data -c config -a apps --prod --install --auth --device-type armv7
