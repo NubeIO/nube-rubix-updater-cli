@@ -10,3 +10,4 @@ nube-cli
 download-bios
 send-zip.bash
 cli.yml
+remote-ssh.sh
